@@ -1,6 +1,6 @@
 /tmp
 /out-tsc
-
+/.idea
 /node_modules
 npm-debug.log*
 yarn-debug.log*
@@ -12,3 +12,4 @@ tsconfig.json
 .DS_Store
 .gitignore
 .vscode/*
+CNAME
