@@ -1,23 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Progres regionów</title>
+    <title>Odyssey Region Tracker</title>
     <link rel="stylesheet" href="styl.css">
-    <link rel="icon" type="image/png" href="../img/icon.png">
 </head>
 <body>
-    <h1>🗺️ Progres czyszczenia Grecji</h1>
-  <div class="tabela-container">
-    <table id="tabela"></table>
-  </div>
-    <div id="progres" class="progres">
-  <span>Progres: 0% (0/38)</span>
+<h1>Odyssey Region Tracker</h1>
+<p class="opis">Mapa czeka na wyczyszczenie, a Ty nie wiesz od czego zacząć? Wylosuj region i obserwuj swój progres na bieżąco.</p>
+
+
+
+<div class="search">
+    <input type="text" id="searchRegion" placeholder="Szukaj regionu...">
 </div>
 
-    <div class="region-losowy" id="regionLosowy"></div>
-    <button class="btn" id="losujBtn">🎲 Wylosuj region</button>
-    <script src="skrypt.js"></script>
+<div class="tabela-container">
+    <table id="tabela"></table>
+</div>
+
+<div class="progres">
+    <div class="pasek"></div>
+    <span class="progres-text">Progres: 0%</span>
+</div>
+
+<div class="region-losowy" id="regionLosowy"></div>
+<button class="btn" id="losujBtn">Losuj region</button>
+
+<script src="skrypt.js"></script>
 </body>
 </html>
