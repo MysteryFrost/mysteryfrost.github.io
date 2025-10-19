@@ -1,0 +1,16 @@
+body, html {
+    margin: 0;
+    height: 100%;
+    background-color: #000005;
+}
+
+.gif {
+    text-align: center;
+    color: white;
+    font-family: "Arial", serif;
+    font-style: oblique;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

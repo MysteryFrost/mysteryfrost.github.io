@@ -1,0 +1,247 @@
+:root {
+  --bg1: #05010a;
+  --bg2: #120a3d;
+  --accent: #b043ff;
+  --accent2: #00ffff;
+  --good: #00ff9d;
+  --warn: #ff9d00;
+  --bad: #ff0055;
+  --shadow: 0 0 30px rgba(176,67,255,0.3), 0 0 60px rgba(0,255,255,0.1);
+  --blur: blur(80px);
+  --font: 'Inter', 'Segoe UI', Roboto, sans-serif;
+}
+
+/* tło: wielowarstwowy gradient + animowany ruch */
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: var(--font);
+  color: #d4d4ff;
+  background: radial-gradient(circle at 10% 10%, rgba(176,67,255,0.15), transparent 40%),
+              radial-gradient(circle at 90% 90%, rgba(0,255,255,0.15), transparent 40%),
+              linear-gradient(135deg, var(--bg1), var(--bg2));
+  background-size: 200% 200%;
+  animation: bgMove 12s infinite alternate ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: 40px 20px;
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* cząsteczki w tle (pseudo randomowe punkty) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 3px 3px;
+  animation: drift 60s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+@keyframes drift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-300px, -300px); }
+}
+
+/* nagłówek – glitch neon */
+h1 {
+  z-index: 1;
+  font-size: 22px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 10px var(--accent), 0 0 25px var(--accent2);
+  animation: flicker 3s infinite;
+  position: relative;
+}
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    opacity: 0.4;
+  }
+}
+
+/* tabela w kontenerze ze szkłem i neonem */
+.tabela-container {
+  width: 85%;
+  max-width: 900px;
+  height: 420px;
+  overflow-y: auto;
+  background: rgba(255,255,255,0.02);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  animation: pulseBorder 8s infinite ease-in-out;
+  z-index: 1;
+}
+
+@keyframes pulseBorder {
+  0%,100% { box-shadow: 0 0 25px rgba(176,67,255,0.3); border-color: rgba(176,67,255,0.2); }
+  50% { box-shadow: 0 0 45px rgba(0,255,255,0.4); border-color: rgba(0,255,255,0.25); }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+tr {
+  transition: all 0.25s ease;
+}
+tr:hover {
+  background: rgba(176,67,255,0.07);
+  transform: scale(1.02);
+}
+td {
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Checkbox – neonowy błysk */
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.05);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+input[type="checkbox"]:hover {
+  border-color: var(--accent2);
+  box-shadow: 0 0 10px rgba(0,255,255,0.2);
+}
+input[type="checkbox"]:checked {
+  background: radial-gradient(circle at 30% 30%, var(--good), var(--accent));
+  border-color: var(--good);
+  box-shadow: 0 0 15px var(--good), 0 0 30px var(--accent);
+  animation: popGlow 0.4s ease-out;
+}
+@keyframes popGlow {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* pasek progresu */
+.progres {
+  width: 85%;
+  max-width: 900px;
+  margin-top: 14px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  padding: 12px;
+  box-shadow: var(--shadow);
+  z-index: 1;
+}
+.pasek {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 0%;
+  border-radius: 10px;
+  transition: width 0.6s ease-in-out;
+  background: linear-gradient(90deg, var(--bad), var(--warn), var(--good));
+  background-size: 300% 100%;
+  animation: progressFlow 6s linear infinite;
+  filter: blur(2px);
+  z-index: 0;
+}
+
+@keyframes progressFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.progres span {
+  position: relative;
+  z-index: 1;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* przycisk losowania */
+.btn {
+  z-index: 1;
+  margin-top: 20px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: black;
+  font-weight: 700;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.2s;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: translateX(-100%);
+  transition: 0.5s;
+}
+.btn:hover::before {
+  transform: translateX(100%);
+}
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0,255,255,0.4);
+}
+
+/* region losowy */
+.region-losowy {
+  z-index: 1;
+  margin-top: 16px;
+  font-weight: bold;
+  color: var(--accent2);
+  text-shadow: 0 0 10px var(--accent2);
+  animation: pulseText 2.5s infinite;
+}
+@keyframes pulseText {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.6; text-shadow: 0 0 20px var(--accent2); }
+}
+
+/* przewijanie tylko tabeli, styl scrollbar */
+.tabela-container::-webkit-scrollbar { width: 10px; }
+.tabela-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent), var(--accent2));
+  border-radius: 10px;
+}
+
+/* cząstki świetlne — pseudoefekt depth */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 2px 2px;
+  mix-blend-mode: color-dodge;
+  opacity: 0.4;
+  pointer-events: none;
+  animation: rotateGrid 120s linear infinite;
+}
+@keyframes rotateGrid {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(360deg) scale(1.4); }
+}
